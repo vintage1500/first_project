@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Статьи автора: {{ username }}
+{% endblock title %}
+
+{% block content %}
+
+<div class="mb-3">
+    <h3 class="text-center"></h3>
+    <div class="d-flex gap-3">
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Username: {{ user.username }}
+                </li>
+                <li class="list-group-item">
+                    Email: {{ user.email }}
+                </li>
+                <li class="list-group-item">
+                    Joined: {{ user.date_joined.date }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-9">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Общее количество просмотров статей: {{ total_views }}
+                </li>
+                <li class="list-group-item">
+                    Общее количество комментариев: {{ total_comments }}
+                </li>
+                <li class="list-group-item">
+                    Общее количество статей: {{ total_books }}
+                </li>
+                <li class="list-group-item">
+                    Количество дней с момента регестрации: {{ days_left }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for book in books %}
+    <div class="col-4 mb-4">
+        <div class="card" style="width: 18rem;">
+            {% if book.image %}
+            <img src="{{ book.image.url }}" class="card-img-top h-100" alt="...">
+            {% else %}
+            <div class="d-flex flex-column justify-content-center align-items-centre">
+                No photo
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <p class="card-text">{{ book.title }}</p>
+                <p class="card-text">{{ book.description }}</p>
+                <p class="card-text"><small>Создано: {{ book.created_at }}</small></p>
+                <a href="{{ book.get_absolute_url }}" class="btn btn-dark">
+                    Подробнее
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Главная страница отвечаю
+{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    {% for book in books %}
+    <div class="col-4 mb-4">
+        <div class="card" style="width: 18rem;">
+            {% if book.image %}
+            <img src="{{ book.image.url }}" class="card-img-top h-100" alt="...">
+            {% else %}
+            <div class="d-flex flex-column justify-content-center align-items-center h-100 mt-5 mb-5">
+                No photo
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <p class="card-text">{{ book.title }}</p>
+                <p class="card-text">{{ book.description }}</p>
+                <p class="card-text"><small>Создано: {{ book.created_at }}</small></p>
+                <a href="{{ book.get_absolute_url }}" class="btn btn-dark">
+                    Подробнее
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+{% endblock content %}

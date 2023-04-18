@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Удалить статью {{ book.title }}
+{% endblock title %}
+
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <p>Вы действительно хотите удалить статью: {{ book.title }}?</p>
+
+    <button class="btn btn-danger">Да</button>
+    <a href="{{ books.get_absolute_url }} " class="btn btn-warning">Нет</a>
+</form>
+{% endblock content %}
